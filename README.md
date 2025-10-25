@@ -1,6 +1,13 @@
 # Fractal Viewer
 
-## Example Images
+## Example Videos and Images
+
+![Demo](Images/1.webp)
+![Demo](Images/2.webp)
+![Demo](Images/3.webp)
+![Demo](Images/4.webp)
+![Demo](Images/5.webp)
+![Demo](Images/6.webp)
 
 <img src="./Images/1.png">
 <img src="./Images/2.png">

@@ -19,7 +19,21 @@ void* update(void*){
     map = (cfloat*)malloc(WIDTH*HEIGHT*sizeof(cfloat));
     for(iterations = 0; thread_run; ++iterations){
         if (reset) {
-            reset_map();
+            if(fractal == mandelbrot_iterative){
+                for(int i = 0; i < WIDTH*HEIGHT; ++i){
+                    map[i] = INITIAL_Z;
+                }
+            }
+            else if(fractal == julia_iterative){
+                for(int x = 0; x < WIDTH; ++x){
+                    for(int y = 0; y < HEIGHT; ++y){
+                        map[x + y*WIDTH] = (cfloat){
+                                (double)(x - offset.x)/zoom, 
+                                (double)(y - offset.y)/zoom
+                                 };
+                    }
+                }
+            }
             reset = false;
             iterations = 0;
         }
@@ -92,23 +106,6 @@ void* update(void*){
 }
 
 
-void reset_map(){
-    if(fractal == mandelbrot_iterative){
-        for(int i = 0; i < WIDTH*HEIGHT; ++i){
-            map[i] = INITIAL_Z;
-        }
-    }
-    else if(fractal == julia_iterative){
-        for(int x = 0; x < WIDTH; ++x){
-            for(int y = 0; y < HEIGHT; ++y){
-                map[x + y*WIDTH] = (cfloat){
-                        (double)(x - offset.x)/zoom, 
-                        (double)(y - offset.y)/zoom
-                         };
-            }
-        }
-    }
-
-    
+void reset_map(){    
     reset = true;
 }

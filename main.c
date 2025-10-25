@@ -4,27 +4,23 @@
 #include <pthread.h>
 #include "Mandelbrot.h"
 #include "Julia.h"
+#include "Update.h"
 
-#define WIDTH (1920)
-#define HEIGHT (1080)
-
-uint32_t pixels[WIDTH * HEIGHT];
 float zoom = 1.f/4.2f*WIDTH;
 cfloat offset = {WIDTH/2.f, HEIGHT/2.f};
 
 pthread_t thread;
-bool thread_run;
 
-void* update(void*);
-
-Convergence (*fractal)(cfloat) = julia;
+SDL_Window* win;
+SDL_Renderer* renderer;
 
 int main(){
    
     SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Window* win = SDL_CreateWindow("Falling Sand", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
-    SDL_Renderer* renderer = SDL_CreateRenderer(win, -1, 0);
+    win = SDL_CreateWindow("Fractal Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
+    renderer = SDL_CreateRenderer(win, -1, 0);
     // SDL_ShowCursor(false);
+    // SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     SDL_Texture *texture = SDL_CreateTexture(
         renderer,
@@ -59,43 +55,4 @@ int main(){
     SDL_DestroyWindow(win);
     SDL_Quit();
     return 0;
-}
-
-void* update(void*){ 
-    while(thread_run){
-        for (int y = 0; y < HEIGHT; y++) {
-            for (int x = 0; x < WIDTH; x++) {
-                Convergence res = fractal( (cfloat){
-                        (float)(x - offset.x)/zoom, 
-                        (float)(y - offset.y)/zoom
-                         } );
-
-                uint8_t r, g, b;
-
-                if(res.converged){ // [0,2) Black region
-                    r = g = b = 0;
-                
-                }
-                else{
-                    if (res.iterations < 20){
-                        b = (255 * res.iterations/3) / 20 + 0xff/3;
-                        r = g = 0;
-                    }
-                    else{
-                        // float x = logf(res.iterations); (15, inf)
-                        b = (res.iterations - 20) / (float)(NUM_ITERATIONS - 20) * (0xff-0xaa) + 0xaa;
-                        r = g = (res.iterations - 20) / (float)(NUM_ITERATIONS - 20) * 0xff;
-                        // r = b = g = 255 - (255.f / 89.f * x);
-                    }
-                }
-                // else{ // (2, inf)
-                //    float x = logf(res.iterations);
-                //    r = b = g = 255 - (255.f / 89.f * x);
-                // } 
-                
-                pixels[y * WIDTH + x] = (255 << 24) | (r << 16) | (g << 8) | b;
-            }
-        }
-    }
-    return NULL;
 }

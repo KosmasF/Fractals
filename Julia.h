@@ -5,6 +5,6 @@
 
 #define NUM_ITERATIONS 100
 
-Convergence julia(cfloat input);
+Divergence julia(cfloat input);
 
 #endif

@@ -5,6 +5,7 @@
 
 #define NUM_ITERATIONS 100
 
-Convergence mandelbrot(cfloat input); 
+Divergence mandelbrot(cfloat input); 
+void mandelbrot_iterative(cfloat input, cfloat* map_coord);
 
 #endif

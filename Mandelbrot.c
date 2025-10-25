@@ -17,7 +17,7 @@ Divergence mandelbrot(cfloat input){
 void mandelbrot_iterative(cfloat input, cfloat* map_coord){    
     cfloat z0 = *map_coord;
     cfloat z1 = addc(mulc(z0, z0), input);
-    
+   
     if(absc(z1) > 2.f){
         (*map_coord).x = INFINITY;
         return;

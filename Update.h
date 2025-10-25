@@ -6,6 +6,8 @@
 #include <stdlib.h>
 
 void* update(void*);
+void reset_map();
+
 extern void (*fractal)(cfloat, cfloat*);
 extern cfloat* map;
 extern bool reset;

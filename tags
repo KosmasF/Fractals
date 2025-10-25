@@ -53,6 +53,14 @@
 !_TAG_KIND_DESCRIPTION!Make	I,makefile	/makefiles/
 !_TAG_KIND_DESCRIPTION!Make	m,macro	/macros/
 !_TAG_KIND_DESCRIPTION!Make	t,target	/targets/
+!_TAG_KIND_DESCRIPTION!Markdown	S,subsection	/level 2 sections/
+!_TAG_KIND_DESCRIPTION!Markdown	T,l4subsection	/level 4 sections/
+!_TAG_KIND_DESCRIPTION!Markdown	c,chapter	/chapters/
+!_TAG_KIND_DESCRIPTION!Markdown	h,hashtag	/hashtags/
+!_TAG_KIND_DESCRIPTION!Markdown	n,footnote	/footnotes/
+!_TAG_KIND_DESCRIPTION!Markdown	s,section	/sections/
+!_TAG_KIND_DESCRIPTION!Markdown	t,subsubsection	/level 3 sections/
+!_TAG_KIND_DESCRIPTION!Markdown	u,l5subsection	/level 5 sections/
 !_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
@@ -61,6 +69,7 @@
 !_TAG_PARSER_VERSION!C++	1.1	/current.age/
 !_TAG_PARSER_VERSION!D	0.0	/current.age/
 !_TAG_PARSER_VERSION!Make	1.1	/current.age/
+!_TAG_PARSER_VERSION!Markdown	1.1	/current.age/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
 !_TAG_PROC_CWD	/home/Kosmas/Documents/Fractals/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
@@ -100,29 +109,58 @@ CPP_SOURCES	Makefile	/^CPP_SOURCES = $(wildcard *.cpp)$/;"	m
 CXX	Makefile	/^CXX = g++$/;"	m
 C_OBJECTS	Makefile	/^C_OBJECTS = $(patsubst %.c,%_c.o,$(C_SOURCES))$/;"	m
 C_SOURCES	Makefile	/^C_SOURCES = $(wildcard *.c)$/;"	m
-Convergence	Utils.h	/^} Convergence;$/;"	t	typeref:struct:__anona91567cc0208
 DEP_FILES	Makefile	/^DEP_FILES = $(patsubst %.o,%.d,$(CPP_OBJECTS)) $(patsubst %.o,%.d,$(C_OBJECTS))$/;"	m
+Description	README.md	/^## Description$/;"	s	chapter:Fractal Viewer
+Divergence	Utils.h	/^} Divergence;$/;"	t	typeref:struct:__anona91567cc0208
 EXECUTABLE	Makefile	/^EXECUTABLE = main$/;"	m
-HEIGHT	main.c	/^#define HEIGHT /;"	d	file:
+Example Images	README.md	/^## Example Images$/;"	s	chapter:Fractal Viewer
+Fractal Viewer	README.md	/^# Fractal Viewer$/;"	c
+Functionality	README.md	/^## Functionality$/;"	s	chapter:Fractal Viewer
+HEIGHT	Utils.h	/^#define HEIGHT /;"	d
 INC	Makefile	/^INC = -I. -I\/usr\/include\/SDL2$/;"	m
+INITIAL_C	Julia.c	/^cfloat INITIAL_C = {0.f,0.f};$/;"	v	typeref:typename:cfloat
+INITIAL_Z	Mandelbrot.c	/^cfloat INITIAL_Z = {0,0};$/;"	v	typeref:typename:cfloat
+JULIA_H	Julia.h	/^#define JULIA_H$/;"	d
 LDFLAGS	Makefile	/^LDFLAGS = -L. -L\/usr\/lib -no-pie$/;"	m
 LDLIBS	Makefile	/^LDLIBS = -lm -lSDL2 -lSDL2_ttf -lOpenCL$/;"	m
+LOOP_H	Loop.h	/^#define LOOP_H$/;"	d
 Loop	Loop.c	/^bool Loop()$/;"	f	typeref:typename:bool
-WIDTH	main.c	/^#define WIDTH /;"	d	file:
-_LOOP_H_	Loop.h	/^#define _LOOP_H_$/;"	d
-_MANDELBROT_H_	Mandelbrot.h	/^#define _MANDELBROT_H_$/;"	d
-_UTILS_H_	Utils.h	/^#define _UTILS_H_$/;"	d
+MANDELBROT_H	Mandelbrot.h	/^#define MANDELBROT_H$/;"	d
+NUM_ITERATIONS	Julia.h	/^#define NUM_ITERATIONS /;"	d
+NUM_ITERATIONS	Mandelbrot.h	/^#define NUM_ITERATIONS /;"	d
+SAVE_H	Save.h	/^#define SAVE_H$/;"	d
+Save	Save.c	/^void Save(void) {$/;"	f	typeref:typename:void
+UPDATE_H	Update.h	/^#define UPDATE_H$/;"	d
+UTILS_H	Utils.h	/^#define UTILS_H$/;"	d
+WIDTH	Utils.h	/^#define WIDTH /;"	d
+ZOOM_RATIO	Loop.h	/^#define ZOOM_RATIO /;"	d
 __anona91567cc0108	Utils.h	/^typedef struct{$/;"	s
 __anona91567cc0208	Utils.h	/^typedef struct{$/;"	s
-absc	Utils.h	/^float absc(cfloat a){$/;"	f	typeref:typename:float
-addc	Utils.h	/^cfloat addc(cfloat a, cfloat b){$/;"	f	typeref:typename:cfloat
+absc	Utils.c	/^float absc(cfloat a){$/;"	f	typeref:typename:float
+addc	Utils.c	/^cfloat addc(cfloat a, cfloat b){$/;"	f	typeref:typename:cfloat
 cfloat	Utils.h	/^} cfloat;$/;"	t	typeref:struct:__anona91567cc0108
 clean	Makefile	/^clean:$/;"	t
-converged	Utils.h	/^    bool converged;$/;"	m	struct:__anona91567cc0208	typeref:typename:bool
+diverged	Utils.h	/^    bool diverged;$/;"	m	struct:__anona91567cc0208	typeref:typename:bool
+fractal	Update.c	/^void (*fractal)(cfloat, cfloat*) = mandelbrot_iterative;$/;"	v	typeref:typename:void (*)(cfloat,cfloat *)
+iterations	Update.c	/^unsigned int iterations;$/;"	v	typeref:typename:unsigned int
 iterations	Utils.h	/^    uint32_t iterations;$/;"	m	struct:__anona91567cc0208	typeref:typename:uint32_t
+julia	Julia.c	/^Divergence julia(cfloat input){$/;"	f	typeref:typename:Divergence
+julia_iterative	Julia.c	/^void julia_iterative(cfloat, cfloat* map_coord){$/;"	f	typeref:typename:void
 main	main.c	/^int main(){$/;"	f	typeref:typename:int
-mandelbrot	Mandelbrot.c	/^Convergence mandelbrot(cfloat input){$/;"	f	typeref:typename:Convergence
-mulc	Utils.h	/^cfloat mulc(cfloat a, cfloat b){$/;"	f	typeref:typename:cfloat
-pixels	main.c	/^uint32_t pixels[WIDTH * HEIGHT];$/;"	v	typeref:typename:uint32_t[]
-x	Utils.h	/^    float x;$/;"	m	struct:__anona91567cc0108	typeref:typename:float
-y	Utils.h	/^    float y;$/;"	m	struct:__anona91567cc0108	typeref:typename:float
+mandelbrot	Mandelbrot.c	/^Divergence mandelbrot(cfloat input){    $/;"	f	typeref:typename:Divergence
+mandelbrot_iterative	Mandelbrot.c	/^void mandelbrot_iterative(cfloat input, cfloat* map_coord){    $/;"	f	typeref:typename:void
+map	Update.c	/^cfloat *map;$/;"	v	typeref:typename:cfloat *
+mouse_pressed	Loop.c	/^bool mouse_pressed = false;$/;"	v	typeref:typename:bool
+mulc	Utils.c	/^cfloat mulc(cfloat a, cfloat b){$/;"	f	typeref:typename:cfloat
+offset	main.c	/^cfloat offset = {WIDTH\/2.f, HEIGHT\/2.f};$/;"	v	typeref:typename:cfloat
+pixels	Update.c	/^unsigned int *pixels;$/;"	v	typeref:typename:unsigned int *
+renderer	main.c	/^SDL_Renderer* renderer;$/;"	v	typeref:typename:SDL_Renderer *
+reset	Update.c	/^bool reset;$/;"	v	typeref:typename:bool
+reset_map	Update.c	/^void reset_map(){$/;"	f	typeref:typename:void
+thread	main.c	/^pthread_t thread;$/;"	v	typeref:typename:pthread_t
+thread_run	Update.c	/^bool thread_run;$/;"	v	typeref:typename:bool
+update	Update.c	/^void* update(void*){$/;"	f	typeref:typename:void *
+win	main.c	/^SDL_Window* win;$/;"	v	typeref:typename:SDL_Window *
+x	Utils.h	/^    double x;$/;"	m	struct:__anona91567cc0108	typeref:typename:double
+y	Utils.h	/^    double y;$/;"	m	struct:__anona91567cc0108	typeref:typename:double
+zoom	main.c	/^float zoom = 1.f\/4.2f*WIDTH;$/;"	v	typeref:typename:float

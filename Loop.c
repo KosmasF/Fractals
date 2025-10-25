@@ -31,20 +31,15 @@ bool Loop()
                 offset.x = - (((e.wheel.mouseX - offset.x) * zoom) / (zoom / scale) - e.wheel.mouseX);
                 offset.y = - (((e.wheel.mouseY- offset.y) * zoom) / (zoom / scale) - e.wheel.mouseY);
             }
-            for(int i = 0; i < WIDTH*HEIGHT; ++i){
-                map[i] = INITIAL_Z;
-            }
-            reset = true;
+
+            reset_map();            
         }
         else if(e.type == SDL_MOUSEMOTION)
         {
             if(mouse_pressed){
                 offset.x += e.motion.xrel;
                 offset.y += e.motion.yrel;
-                for(int i = 0; i < WIDTH*HEIGHT; ++i){
-                    map[i] = INITIAL_Z;
-                }
-                reset = true;
+                reset_map();
             }
         }
         else if(e.type == SDL_MOUSEBUTTONDOWN)
@@ -60,10 +55,12 @@ bool Loop()
             switch (e.key.keysym.sym)
             {
                 case SDLK_j:
-                    // fractal = julia;
+                    fractal = julia_iterative;
+                    reset_map();
                     break;
                 case SDLK_m:
                     fractal = mandelbrot_iterative;
+                    reset_map();
                     break;
                 case SDLK_s:
                     Save();

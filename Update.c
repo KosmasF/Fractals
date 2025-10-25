@@ -1,4 +1,7 @@
 #include "Update.h"
+#include "Mandelbrot.h"
+#include "Julia.h"
+#include <stdio.h>
 
 void (*fractal)(cfloat, cfloat*) = mandelbrot_iterative;
 cfloat *map;
@@ -8,10 +11,18 @@ bool thread_run;
 
 unsigned int *pixels;
 
+extern cfloat INITIAL_Z;
+extern cfloat INITIAL_C;
+
 void* update(void*){
     pixels = (unsigned int*)malloc(WIDTH*HEIGHT*sizeof(unsigned int)); 
     map = (cfloat*)malloc(WIDTH*HEIGHT*sizeof(cfloat));
     for(iterations = 0; thread_run; ++iterations){
+        if (reset) {
+            reset_map();
+            reset = false;
+            iterations = 0;
+        }
         for (int y = 0; y < HEIGHT; y++) {
             for (int x = 0; x < WIDTH; x++) {
                 // Convergence res = fractal( (cfloat){
@@ -44,6 +55,10 @@ void* update(void*){
 
                 uint8_t r, g, b;
 
+                // if(x == 0 && y == 0)
+                //     if(iterations > 20 && !res.diverged)
+                //         printf("%i\n", iterations);
+
                 if(!res.diverged){ // [0,2) Black region
                     r = g = b = 0;
                 
@@ -52,8 +67,10 @@ void* update(void*){
                     if (res.iterations < 20){
                         b = (255 * res.iterations/3) / 20 + 0xff/3;
                         r = g = 0;
+                        // r = 255;
                     }
                     else{
+                      
                         // float x = logf(res.iterations); (15, inf)
                         b = (res.iterations - 20) / (float)(iterations - 20) * (0xff-0xaa) + 0xaa;
                         r = g = (res.iterations - 20) / (float)(iterations - 20) * 0xff;
@@ -68,12 +85,30 @@ void* update(void*){
                 pixels[y * WIDTH + x] = (255 << 24) | (r << 16) | (g << 8) | b;
             }
         }
-        if (reset) {
-            reset = false;
-            iterations = 0;
-        }
     }
     free(map);
     free(pixels);
     return NULL;
+}
+
+
+void reset_map(){
+    if(fractal == mandelbrot_iterative){
+        for(int i = 0; i < WIDTH*HEIGHT; ++i){
+            map[i] = INITIAL_Z;
+        }
+    }
+    else if(fractal == julia_iterative){
+        for(int x = 0; x < WIDTH; ++x){
+            for(int y = 0; y < HEIGHT; ++y){
+                map[x + y*WIDTH] = (cfloat){
+                        (double)(x - offset.x)/zoom, 
+                        (double)(y - offset.y)/zoom
+                         };
+            }
+        }
+    }
+
+    
+    reset = true;
 }

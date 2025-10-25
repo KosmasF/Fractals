@@ -6,5 +6,6 @@
 #define NUM_ITERATIONS 100
 
 Divergence julia(cfloat input);
+void julia_iterative(cfloat input, cfloat* map_coord);
 
 #endif
